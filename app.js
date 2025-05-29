@@ -8,7 +8,7 @@ const bodyParser=require("body-parser")
 
 app.use(bodyParser.json())
 app.use("/",UserRouter)
-app.use("/Vehicle",VehicleRouter)
+app.use("/vehicle",VehicleRouter)
 
 const PORT = process.env.PORT || 2000;
 
@@ -29,6 +29,6 @@ const connectDB=async()=>{
 connectDB();
 
 app.listen(2000,()=>{
-    console.log("server is running");
+    console.log("server is running "+ PORT);
     
 })

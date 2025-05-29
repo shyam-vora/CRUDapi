@@ -1,13 +1,14 @@
 const ex=require("express");
 const router = ex.Router();
 const Vehicles=require("../models/Myvehicles");
+const User = require("../models/User");
 
 
 
 //create data 
 router.post("/api/add_vehicle",async(req,res)=>{
     try {
-        const Newvehicle= await Vehicles.create(req.body)
+        const Newvehicle= await Vehicles.create(req.body.userID)
         console.log(req);
     
         res.json(Newvehicle);
@@ -20,11 +21,12 @@ router.post("/api/add_vehicle",async(req,res)=>{
 
 
 // get single data 
-router.get("/:VehicleID",async(req,res)=>{
-    const Vehicelid=req.params.VehicleID
+router.get("/:userID",async(req,res)=>{
+    const userid=req.params.userID
     try {
-        const u = await  Vehicles.findById(Vehicelid)
-        res.json(u);
+        const u = await  User.findById(userid)
+        console.log(u);
+        res.json(u.vehicles);
     } catch (error)     {
         res.json(error);
     }

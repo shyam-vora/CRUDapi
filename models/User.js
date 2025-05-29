@@ -6,7 +6,7 @@ const User=mongoose.Schema({
      phnNumber:Number,
      email:String,
      password:String,
-     vehicals: [{ type: mongoose.Schema.Types.ObjectId, ref: "vehical" }]
+     vehicles: [{ type: new mongoose.Schema({color:String}) }]
 }, { timestamps: true })
 
 
