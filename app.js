@@ -14,6 +14,7 @@ app.use(express.json());
 // Routes
 app.use("/api/user", require("./routes/User"));
 app.use("/api/vehicle", require("./routes/Myvehicles"));
+app.use("/api/notification", require("./routes/SendNotification"));
 
 app.get("/", (req, res) => {
   res.send("API is running");
