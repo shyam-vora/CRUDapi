@@ -1,34 +1,25 @@
-const express=require("express");
-const  UserRouter=require("./routes/User")
-const VehicleRouter=require("./routes/Myvehicles")
-const app=express();
-const { default: mongoose } = require("mongoose");
-require("dotenv").config()
-const bodyParser=require("body-parser")
+const express = require("express");
+const dotenv = require("dotenv");
+const connectDB = require("./config/db");
 
-app.use(bodyParser.json())
-app.use("/",UserRouter)
-app.use("/Vehicle",VehicleRouter)
+// Load env variables
+dotenv.config();
 
-const PORT = process.env.PORT || 2000;
-
-const connectDB=async()=>{
-   
-    try{
-        await mongoose.connect(process.env.connecationurl,{
-            useNewUrlParser: true,
-        })
-        console.log("connect to DB")
-    }
-    catch (error) {
-        console.error("Database connection failed:", error);
-        process.exit(1); 
-    }
-}
-
+// Connect to MongoDB
 connectDB();
 
-app.listen(2000,()=>{
-    console.log("server is running");
-    
-})
+const app = express();
+
+// Middleware
+app.use(express.json());
+
+// Routes
+app.use("/api/user", require("./routes/User"));
+app.use("/api/vehicle", require("./routes/Myvehicles"));
+
+// Health check
+app.get("/", (req, res) => {
+  res.send("API is running");
+});
+
+module.exports = app;

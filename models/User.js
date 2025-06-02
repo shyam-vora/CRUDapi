@@ -1,13 +1,24 @@
-const mongoose=require("mongoose");
-const v=require("../models/Myvehicles");
+const mongoose = require("mongoose");
+const vehicle = require("./Vehicle");
 
-const User=mongoose.Schema({
-     name:String,
-     phnNumber:Number,
-     email:String,
-     password:String,
-     vehicals: [{ type: mongoose.Schema.Types.ObjectId, ref: "vehical" }]
-}, { timestamps: true })
+const UserSchema = mongoose.Schema(
+  {
+    name: String,
+    houseNo: { type: String, unique: true },
+    phone: Number,
+    email: String,
+    password: String
+  },
+  { timestamps: true }
+);
 
+UserSchema.virtual("vehicles", {
+  ref: "Vehical",
+  localField: "_id",
+  foreignField: "userId"
+});
 
-module.exports=mongoose.model("user",User)
+UserSchema.set("toObject", { virtuals: true });
+UserSchema.set("toJSON", { virtuals: true });
+
+module.exports = mongoose.model("User", UserSchema);
