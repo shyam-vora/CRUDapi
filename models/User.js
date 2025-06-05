@@ -8,7 +8,8 @@ const UserSchema = mongoose.Schema(
     phone: Number,
     email: String,
     password: String,
-    fcmToken: String
+    fcmToken: String,
+     // role: { type: String, default: User}
   },
   { timestamps: true }
 );
