@@ -18,6 +18,7 @@ app.use("/api/notification", require("./routes/SendNotification"));
 // app.use("/dashboard",require("./routes/dashboard"));  
 app.use('/polls',require("./routes/poll"));
 app.use('/suggestion',require("./routes/suggetion"));
+app.use('/complaint', require("./routes/complaint"));
 
 app.get("/", (req, res) => {
   res.send("API is running");

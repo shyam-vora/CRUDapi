@@ -15,7 +15,7 @@ exports.createSuggestion =async(req,res)=>{
 
 
 // Get all suggestions
-exports.getSuggestions = async (req, res) => {
+exports.getSuggestions = async (req, res) =>{
   try {
     const suggestions = await Suggestion.find().sort({ createdAt: -1 });
     res.json(suggestions);
